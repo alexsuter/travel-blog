@@ -3,12 +3,12 @@
 
     angular
         .module('app')
-        .controller('TestController', TestController);
+        .controller('MainController', MainController);
 
     /* @ngInject */
-    function TestController() {
+    function MainController() {
         var vm = this;
-        vm.title = 'TestController';
+        vm.title = 'Hello WOrld';
 
         activate();
 
