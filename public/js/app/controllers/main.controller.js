@@ -6,17 +6,11 @@
         .controller('MainController', MainController);
 
     /* @ngInject */
-    function MainController() {
+    function MainController($http) {
         var vm = this;
-        vm.title = 'Hello WOrld';
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-            console.log('Hui')
-        }
+        $http.get("/api/travel-blog").then(function (response) {
+            vm.travelBlogs = response.data;
+        });
     }
 
 })();

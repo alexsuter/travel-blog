@@ -1,4 +1,11 @@
 <div>
-    <a ng-href="/#/other">Other</a>
-    <p>{{vm.title}}</p>
+    <h1>Reise-Blogs</h1>
+    <table>
+        <tr ng-repeat="blog in vm.travelBlogs">
+            <td>{{ blog.title }}</td>
+            <td>{{ blog.destination }}</td>
+            <td>{{ blog.description }}</td>
+            <td><a ng-href="/#/travel-blog/{{ blog._id }}">Anzeigen</a></td>
+        </tr>
+    </table>
 </div>

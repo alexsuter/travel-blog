@@ -5,8 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var mongo = require('./routes/mongo');
-
 var app = express();
 
 // uncomment after placing your favicon in /public
@@ -17,7 +15,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', mongo);
+var travelBlog = require('./routes/travel-blog');
+app.use('/api/travel-blog', travelBlog);
 
 // Return json error for api 404
 app.all('/api/*', function (req, res, next) {
@@ -29,6 +28,15 @@ app.all('/api/*', function (req, res, next) {
 // Use angular not found view for non api requests
 app.all('*', function (req, res) {
     res.redirect('/#' + req.originalUrl);
+});
+
+// Establish for each request a db connection
+var db = require('./components/db');
+db.connect('mongodb://localhost:27017/travelblog', function(err) {
+    if (err) {
+        console.log('Unable to connect to Mongo.');
+        process.exit(1);
+    }
 });
 
 // error handlers
