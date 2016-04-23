@@ -32,7 +32,7 @@ app.all('*', function (req, res) {
 
 // Establish for each request a db connection
 var db = require('./components/db');
-db.connect('mongodb://localhost:27017/travelblog', function(err) {
+db.connect('mongodb://localhost:27017/travelblog', function (err) {
     if (err) {
         console.log('Unable to connect to Mongo.');
         process.exit(1);
@@ -45,22 +45,24 @@ db.connect('mongodb://localhost:27017/travelblog', function(err) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.send('error', {
-            message: err.message,
-            error: err
-        });
+        res
+            .status(err.status || 500)
+            .send({
+                message: err.message,
+                error: err
+            });
     });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.send('error', {
-        message: err.message,
-        error: {}
-    });
+    res
+        .status(err.status || 500)
+        .send({
+            message: err.message,
+            error: {}
+        });
 });
 
 module.exports = app;

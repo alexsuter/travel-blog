@@ -1,5 +1,8 @@
 <div>
     <h1>Reise-Blogs</h1>
+    <p ng-show="vm.errormsg">
+        Es ist ein Fehler aufgetreten: {{vm.errormsg}}
+    </p>
     <table>
         <tr ng-repeat="blog in vm.travelBlogs">
             <td>{{ blog.title }}</td>
