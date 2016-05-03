@@ -1,0 +1,13 @@
+<p ng-show="vm.errormsg">
+    Es ist ein Fehler aufgetreten: {{vm.errormsg}}
+</p>
+<form novalidate>
+    <input type="text" id="input-text-titel" ng-model="vm.blog.title" placeholder="Titel" autofocus/>
+
+    <input type="text" id="input-text-destination" ng-model="vm.blog.destination" placeholder="Ort"/>
+
+    <textarea id="input-textarea-description" ng-model="vm.blog.description" placeholder="Beschreibung"></textarea>
+
+    <a href ng-click="vm.create(vm.blog)">Hinzufügen</a>
+    <a href ng-click="vm.cancelCreation()">Abbrechen</a>
+</form>

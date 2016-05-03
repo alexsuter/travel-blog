@@ -12,12 +12,21 @@
         var vm = this;
         vm.travelBlogs = [];
         vm.errormsg = '';
+        vm.isCreateFormVisible = false;
+
+        vm.loadBlogs = loadBlogs;
+        vm.showCreateForm = showCreateForm;
+        vm.hideCreateForm = hideCreateForm;
 
         activate();
 
         ////////////////
 
         function activate() {
+            return loadBlogs();
+        }
+
+        function loadBlogs() {
             return TravelBlogService.getAll()
                 .then(success)
                 .catch(failed);
@@ -32,6 +41,15 @@
                 }
             }
         }
+
+        function showCreateForm() {
+            vm.isCreateFormVisible = true;
+        }
+
+        function hideCreateForm() {
+            vm.isCreateFormVisible = false;
+        }
+
     }
 
 })();

@@ -32,4 +32,16 @@ router.get('/:blogId', function (req, res) {
     });
 });
 
+/* POST new blog */
+router.post('/', function (req, res) {
+    var blog = req.body;
+
+    db.get().collection(COLLECTION_NAME).insertOne(blog, function (err, result) {
+        if (err) {
+            throw err;
+        }
+        res.send(201, blog);
+    })
+});
+
 module.exports = router;

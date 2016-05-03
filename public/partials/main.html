@@ -3,6 +3,9 @@
     <p ng-show="vm.errormsg">
         Es ist ein Fehler aufgetreten: {{vm.errormsg}}
     </p>
+    <button ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Blog erstellen</button>
+    <create-blog ng-show="vm.isCreateFormVisible" on-success="vm.loadBlogs() && vm.hideCreateForm()"
+                 on-cancel="vm.hideCreateForm()"></create-blog>
     <table>
         <tr ng-repeat="blog in vm.travelBlogs">
             <td>{{ blog.title }}</td>
