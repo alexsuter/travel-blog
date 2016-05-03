@@ -44,4 +44,24 @@ router.post('/', function (req, res) {
     })
 });
 
+/* DELETE blog */
+router.delete('/:blogId', function (req, res) {
+    var blogId = req.params.blogId;
+    db.get().collection(COLLECTION_NAME).find({
+        '_id': ObjectId(blogId)
+    }).limit(1).next(function (err, blog) {
+        if (err) {
+            throw err;
+        }
+        db.get().collection(COLLECTION_NAME).deleteOne({
+            '_id': ObjectId(blogId)
+        }, function(err, result) {
+            if (err) {
+                throw err;
+            }
+            res.send(blog);
+        });
+    });
+});
+
 module.exports = router;
