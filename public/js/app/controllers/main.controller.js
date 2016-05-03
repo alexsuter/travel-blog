@@ -17,6 +17,7 @@
         vm.loadBlogs = loadBlogs;
         vm.showCreateForm = showCreateForm;
         vm.hideCreateForm = hideCreateForm;
+        vm.removeBlog = removeBlog;
 
         activate();
 
@@ -48,6 +49,17 @@
 
         function hideCreateForm() {
             vm.isCreateFormVisible = false;
+        }
+
+        function removeBlog(blogId) {
+            TravelBlogService.remove(blogId)
+            var indexToRemove = -1;
+            for (var index = 0; index < vm.travelBlogs.length; ++index) {
+                if (vm.travelBlogs[index]._id == blogId) {
+                    indexToRemove = index;
+                }
+            }
+            vm.travelBlogs.splice(indexToRemove);
         }
 
     }

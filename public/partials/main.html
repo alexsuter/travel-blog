@@ -12,6 +12,7 @@
             <td>{{ blog.destination }}</td>
             <td>{{ blog.description }}</td>
             <td><a ng-href="/#/blog/{{ blog._id }}">Anzeigen</a></td>
+            <td><a href="" ng-click="vm.removeBlog(blog._id)">Löschen</a></td>
         </tr>
     </table>
 </div>

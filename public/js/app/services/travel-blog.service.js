@@ -13,6 +13,7 @@
 
         this.create = create;
         this.getAll = getAll;
+        this.remove = remove;
         this.get = get;
 
         ////////////////
@@ -27,6 +28,10 @@
 
         function get(blogId) {
             return $http.get(BASE_URL + '/' + blogId).then(success);
+        }
+
+        function remove(blogId) {
+            return $http.delete(BASE_URL + '/' + blogId).then(success);
         }
 
         function success(response) {
