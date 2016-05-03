@@ -9,8 +9,10 @@ function config($routeProvider) {
             controller: 'MainController',
             controllerAs: 'vm'
         })
-        .when('/other', {
-            templateUrl: 'partials/other.html'
+        .when('/blog/:blogId', {
+            templateUrl: 'partials/blog-detail.html',
+            controller: 'BlogDetailController',
+            controllerAs: 'vm'
         })
         .when('/not-found', {
             templateUrl: 'partials/not-found.html'
