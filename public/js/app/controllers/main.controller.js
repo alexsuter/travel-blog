@@ -52,14 +52,7 @@
         }
 
         function removeBlog(blogId) {
-            TravelBlogService.remove(blogId)
-            var indexToRemove = -1;
-            for (var index = 0; index < vm.travelBlogs.length; ++index) {
-                if (vm.travelBlogs[index]._id == blogId) {
-                    indexToRemove = index;
-                }
-            }
-            vm.travelBlogs.splice(indexToRemove);
+            TravelBlogService.remove(blogId).then(loadBlogs);
         }
 
     }
