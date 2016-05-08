@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport	= require('passport');
 var db = require('../components/db');
 var ObjectId = require('mongodb').ObjectID;
 
@@ -33,7 +34,7 @@ router.get('/:blogId', function (req, res) {
 });
 
 /* POST new blog */
-router.post('/', function (req, res) {
+router.post('/', passport.authenticate('jwt', { session: false}), function (req, res) {
     var blog = req.body;
 
     db.get().collection(COLLECTION_NAME).insertOne(blog, function (err, result) {
@@ -45,7 +46,7 @@ router.post('/', function (req, res) {
 });
 
 /* DELETE blog */
-router.delete('/:blogId', function (req, res) {
+router.delete('/:blogId', passport.authenticate('jwt', { session: false}), function (req, res) {
     var blogId = req.params.blogId;
     db.get().collection(COLLECTION_NAME).find({
         '_id': ObjectId(blogId)

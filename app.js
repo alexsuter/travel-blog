@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 
 var app = express();
 
@@ -14,9 +15,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
-var travelBlog = require('./routes/travel-blog');
-app.use('/api/travel-blog', travelBlog);
+var routeTravelBlog = require('./routes/travel-blog');
+app.use('/api/travel-blog', routeTravelBlog);
+
+var routeUser = require('./routes/user');
+app.use('/api/user', routeUser);
 
 // Return json error for api 404
 app.all('/api/*', function (req, res, next) {
