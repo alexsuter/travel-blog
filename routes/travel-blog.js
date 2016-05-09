@@ -21,9 +21,16 @@ router.get('/:blogId', function (req, res) {
 });
 
 /* POST new blog */
-router.post('/', passport.authenticate('jwt', {session: false}), function (req, res) {
+router.post('/', function (req, res) {
     save(req.body, function (blog) {
-        res.send(201, blog);
+        res.state(201).send(blog);
+    });
+});
+
+/* POST new entry */
+router.post('/:blogId/entry', function (req, res) {
+    saveEntry(req.params.blogId, req.body, function (blog) {
+        res.status(201).send(blog);
     });
 });
 
@@ -40,6 +47,19 @@ function save(blog, callback) {
             throw err;
         }
         callback(blog);
+    })
+}
+
+function saveEntry(blogId, entry, callback) {
+    db.get().collection(COLLECTION_NAME).findOneAndUpdate({
+        '_id': ObjectId(blogId)
+    }, {
+        $push: {'entries': entry}
+    }, function (err, result) {
+        if (err) {
+            throw err;
+        }
+        callback(result.value);
     })
 }
 
@@ -68,16 +88,14 @@ function find(blogId, callback) {
 }
 
 function remove(blogId, callback) {
-    find(blogId, function (blog) {
-        db.get().collection(COLLECTION_NAME).deleteOne({
-            '_id': ObjectId(blog._id)
-        }, function (err) {
-            if (err) {
-                throw err;
-            }
-            callback(blog)
-        });
-    })
+    db.get().collection(COLLECTION_NAME).findOneAndDelete({
+        '_id': ObjectId(blogId)
+    }, function (err, result) {
+        if (err) {
+            throw err;
+        }
+        callback(result.value)
+    });
 }
 
 module.exports = router;
