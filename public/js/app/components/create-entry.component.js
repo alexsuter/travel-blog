@@ -40,7 +40,7 @@
         }
 
         function reset() {
-            vm.blog = {};
+            vm.entry = {};
         }
 
         function fail(error) {
