@@ -54,7 +54,12 @@ function saveEntry(blogId, entry, callback) {
     db.get().collection(COLLECTION_NAME).findOneAndUpdate({
         '_id': ObjectId(blogId)
     }, {
-        $push: {'entries': entry}
+        $push: {
+            entries: {
+                $each: [entry],
+                $sort: {timestamp: -1}
+            }
+        }
     }, function (err, result) {
         if (err) {
             throw err;
@@ -65,15 +70,17 @@ function saveEntry(blogId, entry, callback) {
 
 function findAll(callback) {
     db.get().collection(COLLECTION_NAME).find({}, {
-        title: 1,
-        description: 1,
-        destination: 1
-    }).toArray(function (err, result) {
-        if (err) {
-            throw err;
-        }
-        callback(result)
-    });
+            title: 1,
+            description: 1,
+            destination: 1
+        })
+        .sort('_id', -1)
+        .toArray(function (err, result) {
+            if (err) {
+                throw err;
+            }
+            callback(result)
+        });
 }
 
 function find(blogId, callback) {
