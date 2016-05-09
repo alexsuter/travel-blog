@@ -52,7 +52,7 @@
         }
 
         function removeBlog(blogId) {
-            TravelBlogService.remove(blogId).then(loadBlogs);
+            return TravelBlogService.remove(blogId).then(loadBlogs);
         }
 
     }

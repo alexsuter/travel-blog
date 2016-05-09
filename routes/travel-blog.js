@@ -37,7 +37,7 @@ router.get('/:blogId', function (req, res) {
 router.post('/', passport.authenticate('jwt', { session: false}), function (req, res) {
     var blog = req.body;
 
-    db.get().collection(COLLECTION_NAME).insertOne(blog, function (err, result) {
+    db.get().collection(COLLECTION_NAME).insertOne(blog, function (err) {
         if (err) {
             throw err;
         }
@@ -56,7 +56,7 @@ router.delete('/:blogId', passport.authenticate('jwt', { session: false}), funct
         }
         db.get().collection(COLLECTION_NAME).deleteOne({
             '_id': ObjectId(blogId)
-        }, function(err, result) {
+        }, function (err) {
             if (err) {
                 throw err;
             }
