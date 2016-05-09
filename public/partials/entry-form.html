@@ -1,1 +1,13 @@
-<p>{{ vm.title }}</p>
+<p ng-show="vm.errormsg">
+    Es ist ein Fehler aufgetreten: {{vm.errormsg}}
+</p>
+<form novalidate>
+    <input type="date" id="input-date-timestamp" ng-model="vm.entry.timestamp" placeholder="Datum">
+
+    <input type="text" id="input-text-title" ng-model="vm.entry.title" placeholder="Titel">
+
+    <textarea id="textarea-description" ng-model="vm.entry.description" placeholder="Beschreibung"></textarea>
+
+    <a href ng-click="vm.create(vm.entry)">Hinzufügen</a>
+    <a href ng-click="vm.cancelCreation()">Abbrechen</a>
+</form>
