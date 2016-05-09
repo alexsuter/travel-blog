@@ -5,5 +5,10 @@
 
     <button ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Eintrag erstellen</button>
     <create-entry ng-show="vm.isCreateFormVisible" blog-id="vm.blog._id"
-                  on-success="vm.loadBlogs() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
+                  on-success="vm.loadBlog() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
+
+    <div ng-repeat="entry in vm.blog.entries">
+        <h1>{{entry.timestamp | date:'dd.MM.yyyy'}} {{ entry.title }}</h1>
+        <p>{{ entry.description }}</p>
+    </div>
 </div>

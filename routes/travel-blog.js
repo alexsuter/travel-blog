@@ -23,7 +23,7 @@ router.get('/:blogId', function (req, res) {
 /* POST new blog */
 router.post('/', function (req, res) {
     save(req.body, function (blog) {
-        res.state(201).send(blog);
+        res.status(201).send(blog);
     });
 });
 
