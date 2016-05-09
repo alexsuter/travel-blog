@@ -3,5 +3,7 @@
     <h1>{{ vm.blog.title }}</h1>
     <p>{{ vm.blog.description}}</p>
 
-    <create-entry blog-id="vm.blog._id"></create-entry>
+    <button ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Eintrag erstellen</button>
+    <create-entry ng-show="vm.isCreateFormVisible" blog-id="vm.blog._id"
+                  on-success="vm.loadBlogs() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
 </div>

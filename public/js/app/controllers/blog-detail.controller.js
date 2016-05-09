@@ -12,12 +12,21 @@
         var vm = this;
         vm.hasError = false;
         vm.blog = {};
+        vm.isCreateFormVisible = false;
+
+        vm.loadBlog = loadBlog;
+        vm.showCreateForm = showCreateForm;
+        vm.hideCreateForm = hideCreateForm;
 
         activate();
 
         ////////////////
 
         function activate() {
+            loadBlog();
+        }
+
+        function loadBlog() {
             var blogId = $routeParams.blogId;
             return TravelBlogService.get(blogId)
                 .then(success)
@@ -30,6 +39,14 @@
             function error() {
                 vm.hasError = true;
             }
+        }
+
+        function showCreateForm() {
+            vm.isCreateFormVisible = true;
+        }
+
+        function hideCreateForm() {
+            vm.isCreateFormVisible = false;
         }
     }
 
