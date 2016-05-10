@@ -41,6 +41,13 @@ router.delete('/:blogId', function (req, res) {
     })
 });
 
+/* DELETE entry */
+router.delete('/:blogId/entry/:entryId', function (req, res) {
+    removeEntry(req.params.blogId, req.params.entryId, function (blog) {
+        res.send(blog);
+    })
+});
+
 function save(blog, callback) {
     db.get().collection(COLLECTION_NAME).insertOne(blog, function (err) {
         if (err) {
@@ -51,6 +58,7 @@ function save(blog, callback) {
 }
 
 function saveEntry(blogId, entry, callback) {
+    entry._id = ObjectId();
     db.get().collection(COLLECTION_NAME).findOneAndUpdate({
         '_id': ObjectId(blogId)
     }, {
@@ -103,6 +111,23 @@ function remove(blogId, callback) {
         }
         callback(result.value)
     });
+}
+
+function removeEntry(blogId, entryId, callback) {
+    db.get().collection(COLLECTION_NAME).findOneAndUpdate({
+        '_id': ObjectId(blogId)
+    }, {
+        $pull: {
+            entries: {
+                _id: ObjectId(entryId)
+            }
+        }
+    }, function (err, result) {
+        if (err) {
+            throw err;
+        }
+        callback(result.value);
+    })
 }
 
 module.exports = router;
