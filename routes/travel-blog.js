@@ -21,14 +21,14 @@ router.get('/:blogId', function (req, res) {
 });
 
 /* POST new blog */
-router.post('/', passport.authenticate('jwt', {session: false}), function (req, res) {
+router.post('/', function (req, res) {
     save(req.body, function (blog) {
         res.send(201, blog);
     });
 });
 
 /* DELETE blog */
-router.delete('/:blogId', passport.authenticate('jwt', {session: false}), function (req, res) {
+router.delete('/:blogId', function (req, res) {
     remove(req.params.blogId, function (blog) {
         res.send(blog);
     })
