@@ -35,7 +35,7 @@ router.post('/:blogId/entry', function (req, res) {
 });
 
 /* DELETE blog */
-router.delete('/:blogId', passport.authenticate('jwt', {session: false}), function (req, res) {
+router.delete('/:blogId', function (req, res) {
     remove(req.params.blogId, function (blog) {
         res.send(blog);
     })
