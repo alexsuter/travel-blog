@@ -9,7 +9,8 @@
             controllerAs: 'vm',
             bindings: {
                 entry: '<',
-                onDelete: '&'
+                onDelete: '&',
+                onUpdate: '&'
             }
         });
 
@@ -19,8 +20,16 @@
     function EntryDetailController() {
         var vm = this;
 
+        vm.update = update;
+
         ////////////////
 
+        function update(prop, value) {
+            var updatedEntry = vm.entry;
+            updatedEntry[prop] = value;
+
+            vm.onUpdate({entry: updatedEntry});
+        }
 
     }
 

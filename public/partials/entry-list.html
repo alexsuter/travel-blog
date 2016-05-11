@@ -5,5 +5,5 @@
               on-success="vm.$onInit() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
 
 <div ng-repeat="entry in vm.entries">
-    <entry-detail entry="entry" on-delete="vm.remove(entry)"></entry-detail>
+    <entry-detail entry="entry" on-delete="vm.remove(entry)" on-update="vm.update(entry)"></entry-detail>
 </div>

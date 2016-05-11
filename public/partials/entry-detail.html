@@ -1,3 +1,7 @@
-<h1>{{ vm.entry.timestamp | date:'dd.MM.yyyy' }} {{ vm.entry.title }}</h1>
+<h1>{{ vm.entry.timestamp | date:'dd.MM.yyyy' }}
+
+    <editable-field field-value="vm.entry.title" field-type="text"
+                    on-update="vm.update('title', value)"></editable-field>
+</h1>
 <p><a href ng-click="vm.onDelete({entry: vm.entry})">Löschen</a></p>
 <p>{{ vm.entry.description }}</p>

@@ -16,6 +16,7 @@
         this.getAll = getAll;
         this.remove = remove;
         this.removeEntry = removeEntry;
+        this.updateEntry = updateEntry;
         this.get = get;
 
         ////////////////
@@ -42,6 +43,10 @@
 
         function removeEntry(blogId, entryId) {
             return $http.delete(BASE_URL + '/' + blogId + '/entry/' + entryId).then(success);
+        }
+
+        function updateEntry(blogId, entry) {
+            return $http.put(BASE_URL + '/' + blogId + '/entry/' + entry._id, entry).then(success);
         }
 
         function success(response) {

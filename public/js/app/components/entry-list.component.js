@@ -24,6 +24,7 @@
         vm.showCreateForm = showCreateForm;
         vm.hideCreateForm = hideCreateForm;
         vm.remove = remove;
+        vm.update = update;
 
         ////////////////
 
@@ -45,8 +46,13 @@
         }
 
         function remove(entry) {
-            TravelBlogService.removeEntry(vm.blogId, entry._id)
+            return TravelBlogService.removeEntry(vm.blogId, entry._id)
                 .then($onInit)
+        }
+
+        function update(entry) {
+            return TravelBlogService.updateEntry(vm.blogId, entry)
+                .then($onInit);
         }
 
     }
