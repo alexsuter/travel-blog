@@ -15,11 +15,8 @@
             // Don't grab _id from server because promise is not correct resolved
             _id: $routeParams.blogId
         };
-        vm.isCreateFormVisible = false;
 
         vm.loadBlog = loadBlog;
-        vm.showCreateForm = showCreateForm;
-        vm.hideCreateForm = hideCreateForm;
 
         activate();
 
@@ -37,14 +34,6 @@
             function success(data) {
                 vm.blog = data;
             }
-        }
-
-        function showCreateForm() {
-            vm.isCreateFormVisible = true;
-        }
-
-        function hideCreateForm() {
-            vm.isCreateFormVisible = false;
         }
 
         function error() {

@@ -18,8 +18,11 @@
     function EntryListController(TravelBlogService) {
         var vm = this;
         vm.entries = [];
+        vm.isCreateFormVisible = false;
 
         vm.$onInit = $onInit;
+        vm.showCreateForm = showCreateForm;
+        vm.hideCreateForm = hideCreateForm;
         vm.remove = remove;
 
         ////////////////
@@ -31,6 +34,14 @@
             function success(data) {
                 vm.entries = data.entries
             }
+        }
+
+        function showCreateForm() {
+            vm.isCreateFormVisible = true;
+        }
+
+        function hideCreateForm() {
+            vm.isCreateFormVisible = false;
         }
 
         function remove(entry) {

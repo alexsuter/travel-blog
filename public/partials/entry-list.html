@@ -1,3 +1,9 @@
+<h1>Einträge</h1>
+<button ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Eintrag erstellen</button>
+
+<create-entry ng-show="vm.isCreateFormVisible" blog-id="vm.blogId"
+              on-success="vm.$onInit() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
+
 <div ng-repeat="entry in vm.entries">
     <entry-detail entry="entry" on-delete="vm.remove(entry)"></entry-detail>
 </div>
