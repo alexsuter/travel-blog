@@ -11,7 +11,10 @@
     function BlogDetailController($routeParams, TravelBlogService) {
         var vm = this;
         vm.hasError = false;
-        vm.blog = {};
+        vm.blog = {
+            // Don't grab _id from server because promise is not correct resolved
+            _id: $routeParams.blogId
+        };
         vm.isCreateFormVisible = false;
 
         vm.loadBlog = loadBlog;
@@ -28,8 +31,7 @@
         }
 
         function loadBlog() {
-            var blogId = $routeParams.blogId;
-            return TravelBlogService.get(blogId)
+            return TravelBlogService.get(vm.blog._id)
                 .then(success)
                 .catch(error);
 

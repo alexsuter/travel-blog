@@ -7,9 +7,5 @@
     <create-entry ng-show="vm.isCreateFormVisible" blog-id="vm.blog._id"
                   on-success="vm.loadBlog() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
 
-    <div ng-repeat="entry in vm.blog.entries">
-        <h1>{{entry.timestamp | date:'dd.MM.yyyy'}} {{ entry.title }}</h1>
-        <p><a href ng-click="vm.removeEntry(entry._id)">Löschen</a></p>
-        <p>{{ entry.description }}</p>
-    </div>
+    <entry-list blog-id="{{vm.blog._id}}"></entry-list>
 </div>

@@ -1,0 +1,5 @@
+<div ng-repeat="entry in vm.entries">
+    <h1>{{entry.timestamp | date:'dd.MM.yyyy'}} {{ entry.title }}</h1>
+    <p><a href ng-click="vm.removeEntry(entry._id)">Löschen</a></p>
+    <p>{{ entry.description }}</p>
+</div>
