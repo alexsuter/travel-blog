@@ -20,6 +20,7 @@
         vm.entries = [];
 
         vm.$onInit = $onInit;
+        vm.remove = remove;
 
         ////////////////
 
@@ -30,6 +31,11 @@
             function success(data) {
                 vm.entries = data.entries
             }
+        }
+
+        function remove(entry) {
+            TravelBlogService.removeEntry(vm.blogId, entry._id)
+                .then($onInit)
         }
 
     }

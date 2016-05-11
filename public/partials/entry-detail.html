@@ -1,0 +1,3 @@
+<h1>{{ vm.entry.timestamp | date:'dd.MM.yyyy' }} {{ vm.entry.title }}</h1>
+<p><a href ng-click="vm.onDelete({entry: vm.entry})">Löschen</a></p>
+<p>{{ vm.entry.description }}</p>

@@ -20,7 +20,6 @@
         vm.loadBlog = loadBlog;
         vm.showCreateForm = showCreateForm;
         vm.hideCreateForm = hideCreateForm;
-        vm.removeEntry = removeEntry;
 
         activate();
 
@@ -46,12 +45,6 @@
 
         function hideCreateForm() {
             vm.isCreateFormVisible = false;
-        }
-
-        function removeEntry(entryId) {
-            return TravelBlogService.removeEntry(vm.blog._id, entryId)
-                .then(loadBlog)
-                .catch(error)
         }
 
         function error() {
