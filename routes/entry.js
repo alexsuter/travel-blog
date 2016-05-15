@@ -6,7 +6,12 @@ const ENTRY_COLLECTION = 'entry';
 
 /* PUT entry */
 router.put('/:entryId', function (req, res) {
-
+    var entry = req.body;
+    entry._id = req.params.entryId;
+    
+    update(entry, function (entry) {
+        res.send(entry);
+    })
 });
 
 /* DELETE entry */
@@ -16,8 +21,22 @@ router.delete('/:entryId', function (req, res) {
     })
 });
 
+function update(entry, callback) {
+    entry._id = ObjectId(entry._id);
+    entry.blogId = ObjectId(entry.blogId);
+
+    db.entry().findOneAndReplace({
+        '_id': entry._id
+    }, entry, function (err) {
+        if (err) {
+            throw err;
+        }
+        callback(entry);
+    })
+}
+
 function remove(entryId, callback) {
-    db.get().collection(ENTRY_COLLECTION).findOneAndDelete({
+    db.entry().findOneAndDelete({
         '_id': ObjectId(entryId)
     }, function (err, result) {
         if (err) {

@@ -12,10 +12,10 @@
             }
         });
 
-    EntryListController.$inject = ['TravelBlogService'];
+    EntryListController.$inject = ['TravelBlogService', 'EntryService'];
 
     /* @ngInject */
-    function EntryListController(TravelBlogService) {
+    function EntryListController(TravelBlogService, EntryService) {
         var vm = this;
         vm.entries = [];
         vm.isCreateFormVisible = false;
@@ -29,11 +29,11 @@
         ////////////////
 
         function $onInit() {
-            return TravelBlogService.get(vm.blogId)
+            return TravelBlogService.getEntries(vm.blogId)
                 .then(success);
 
             function success(data) {
-                vm.entries = data.entries
+                vm.entries = data
             }
         }
 
@@ -46,12 +46,12 @@
         }
 
         function remove(entry) {
-            return TravelBlogService.removeEntry(vm.blogId, entry._id)
+            return EntryService.remove(entry._id)
                 .then($onInit)
         }
 
         function update(entry) {
-            return TravelBlogService.updateEntry(vm.blogId, entry)
+            return EntryService.update(entry)
                 .then($onInit);
         }
 
