@@ -1,7 +1,12 @@
 <span ng-switch="vm.editMode">
-  <input ng-switch-when="true" type="{{vm.fieldType}}" ng-model="vm.fieldValue" title="Field">
-  <span ng-switch-default ng-if="vm.fieldType !== 'date'">{{vm.fieldValue}}</span>
-  <span ng-switch-default ng-if="vm.fieldType === 'date'">{{vm.fieldValue | date:'dd.MM.yyyy'}}</span>
+    <span ng-switch-when="true" ng-switch="vm.fieldType">
+        <textarea ng-switch-when="textarea" title="Field" ng-model="vm.fieldValue"></textarea>
+        <input ng-switch-default type="{{vm.fieldType}}" ng-model="vm.fieldValue" title="Field">
+    </span>
+    <span ng-switch-default ng-switch="vm.fieldType">
+        <span ng-switch-when="date">{{vm.fieldValue | date:'dd.MM.yyyy'}}</span>
+        <span ng-switch-default>{{vm.fieldValue}}</span>
+    </span>
 </span>
 <button ng-click="vm.handleModeChange()">{{vm.editMode ? 'Speichern' : 'Bearbeiten'}}</button>
 <button ng-if="vm.editMode" ng-click="vm.reset()">Reset</button>

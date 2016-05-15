@@ -6,4 +6,5 @@
                     on-update="vm.update('title', value)"></editable-field>
 </h1>
 <p><a href ng-click="vm.onDelete({entry: vm.entry})">Löschen</a></p>
-<p>{{ vm.entry.description }}</p>
+<editable-field field-value="vm.entry.description" field-type="textarea"
+                on-update="vm.update('description', value)"></editable-field>
