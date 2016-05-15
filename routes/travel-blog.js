@@ -93,7 +93,7 @@ function find(blogId, callback) {
 function findEntries(blogId, callback) {
     db.entry().find({
         'blogId': ObjectId(blogId)
-    }).sort('_id', -1).toArray(function (err, entries) {
+    }).sort('timestamp', -1).toArray(function (err, entries) {
         if (err) {
             throw err;
         }
