@@ -1,10 +1,7 @@
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router();
 var passport = require('passport');
 var db = require('../components/db');
 var ObjectId = require('mongodb').ObjectID;
-
-const COLLECTION_NAME = 'travel-blog';
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -17,6 +14,13 @@ router.get('/', function (req, res) {
 router.get('/:blogId', function (req, res) {
     find(req.params.blogId, function (blog) {
         res.send(blog)
+    })
+});
+
+/* GET blog entries */
+router.get('/:blogId/entry', function (req, res) {
+    findEntries(req.params.blogId, function (entries) {
+        res.send(entries);
     })
 });
 
@@ -41,47 +45,31 @@ router.delete('/:blogId', function (req, res) {
     })
 });
 
-/* DELETE entry */
-router.delete('/:blogId/entry/:entryId', function (req, res) {
-    removeEntry(req.params.blogId, req.params.entryId, function (blog) {
-        res.send(blog);
-    })
-});
-
 function save(blog, callback) {
-    db.get().collection(COLLECTION_NAME).insertOne(blog, function (err) {
+    db.blog().insertOne(blog, function (err) {
         if (err) {
             throw err;
         }
-        callback(blog);
+        callback(result.ops[0])
     })
 }
 
 function saveEntry(blogId, entry, callback) {
-    entry._id = ObjectId();
-    db.get().collection(COLLECTION_NAME).findOneAndUpdate({
-        '_id': ObjectId(blogId)
-    }, {
-        $push: {
-            entries: {
-                $each: [entry],
-                $sort: {timestamp: -1}
-            }
-        }
-    }, function (err, result) {
+    entry.blogId = ObjectId(blogId);
+    db.entry().insertOne(entry, function (err, result) {
         if (err) {
             throw err;
         }
-        callback(result.value);
+        callback(result.ops[0])
     })
 }
 
 function findAll(callback) {
-    db.get().collection(COLLECTION_NAME).find({}, {
-            title: 1,
-            description: 1,
-            destination: 1
-        })
+    db.blog().find({}, {
+        title: 1,
+        description: 1,
+        destination: 1
+    })
         .sort('_id', -1)
         .toArray(function (err, result) {
             if (err) {
@@ -92,7 +80,7 @@ function findAll(callback) {
 }
 
 function find(blogId, callback) {
-    db.get().collection(COLLECTION_NAME).find({
+    db.blog().find({
         '_id': ObjectId(blogId)
     }).limit(1).next(function (err, blog) {
         if (err) {
@@ -102,8 +90,19 @@ function find(blogId, callback) {
     });
 }
 
+function findEntries(blogId, callback) {
+    db.entry().find({
+        'blogId': ObjectId(blogId)
+    }).sort('_id', -1).toArray(function (err, entries) {
+        if (err) {
+            throw err;
+        }
+        callback(entries)
+    });
+}
+
 function remove(blogId, callback) {
-    db.get().collection(COLLECTION_NAME).findOneAndDelete({
+    db.blog().findOneAndDelete({
         '_id': ObjectId(blogId)
     }, function (err, result) {
         if (err) {
@@ -111,23 +110,6 @@ function remove(blogId, callback) {
         }
         callback(result.value)
     });
-}
-
-function removeEntry(blogId, entryId, callback) {
-    db.get().collection(COLLECTION_NAME).findOneAndUpdate({
-        '_id': ObjectId(blogId)
-    }, {
-        $pull: {
-            entries: {
-                _id: ObjectId(entryId)
-            }
-        }
-    }, function (err, result) {
-        if (err) {
-            throw err;
-        }
-        callback(result.value);
-    })
 }
 
 module.exports = router;

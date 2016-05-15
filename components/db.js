@@ -4,7 +4,8 @@ var connection;
 
 module.exports = {
     connect: connect,
-    get: get
+    blog: blog,
+    entry: entry
 };
 
 function connect(url, done) {
@@ -21,6 +22,10 @@ function connect(url, done) {
     })
 }
 
-function get() {
-    return connection;
+function blog() {
+    return connection.collection('travel-blog');
+}
+
+function entry() {
+    return connection.collection('entry');
 }

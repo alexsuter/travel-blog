@@ -5,6 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var db = require('./components/db');
+
+var routeTravelBlog = require('./routes/travel-blog');
+var routeEntry = require('./routes/entry');
+var routeUser = require('./routes/user');
 
 var app = express();
 
@@ -17,10 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
-var routeTravelBlog = require('./routes/travel-blog');
 app.use('/api/travel-blog', routeTravelBlog);
-
-var routeUser = require('./routes/user');
+app.use('/api/entry', routeEntry);
 app.use('/api/user', routeUser);
 
 // Return json error for api 404
@@ -36,7 +39,6 @@ app.all('*', function (req, res) {
 });
 
 // Establish for each request a db connection
-var db = require('./components/db');
 db.connect('mongodb://localhost:27017/travelblog', function (err) {
     if (err) {
         console.log('Unable to connect to Mongo.');
