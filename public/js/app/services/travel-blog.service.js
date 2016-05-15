@@ -16,8 +16,6 @@
         this.getAll = getAll;
         this.getEntries = getEntries;
         this.remove = remove;
-        this.removeEntry = removeEntry;
-        this.updateEntry = updateEntry;
         this.get = get;
 
         ////////////////
@@ -39,23 +37,23 @@
         }
 
         function getEntries(blogId) {
-            return $http.get(BASE_URL + '/' + blogId + '/entry').then(success);
+            return $http.get(BASE_URL + '/' + blogId + '/entry').then(convertEntry);
         }
 
         function remove(blogId) {
             return $http.delete(BASE_URL + '/' + blogId).then(success);
         }
 
-        function removeEntry(blogId, entryId) {
-            return $http.delete(BASE_URL + '/' + blogId + '/entry/' + entryId).then(success);
-        }
-
-        function updateEntry(blogId, entry) {
-            return $http.put(BASE_URL + '/' + blogId + '/entry/' + entry._id, entry).then(success);
-        }
-
         function success(response) {
             return response.data;
+        }
+
+        function convertEntry(response) {
+            var entries = response.data;
+            entries.forEach(function (entry) {
+                entry.timestamp = new Date(entry.timestamp)
+            });
+            return entries
         }
     }
 

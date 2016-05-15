@@ -1,4 +1,6 @@
-<h1>{{ vm.entry.timestamp | date:'dd.MM.yyyy' }}
+<h1>
+    <editable-field field-value="vm.entry.timestamp" field-type="date"
+                    on-update="vm.update('timestamp', value)"></editable-field>
 
     <editable-field field-value="vm.entry.title" field-type="text"
                     on-update="vm.update('title', value)"></editable-field>
