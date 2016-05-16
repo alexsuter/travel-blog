@@ -25,21 +25,21 @@ router.get('/:blogId/entry', function (req, res) {
 });
 
 /* POST new blog */
-router.post('/', function (req, res) {
+router.post('/', passport.authenticate('jwt', {session: false}), function (req, res) {
     save(req.body, function (blog) {
         res.status(201).send(blog);
     });
 });
 
 /* POST new entry */
-router.post('/:blogId/entry', function (req, res) {
+router.post('/:blogId/entry', passport.authenticate('jwt', {session: false}), function (req, res) {
     saveEntry(req.params.blogId, req.body, function (blog) {
         res.status(201).send(blog);
     });
 });
 
 /* DELETE blog */
-router.delete('/:blogId', function (req, res) {
+router.delete('/:blogId', passport.authenticate('jwt', {session: false}), function (req, res) {
     remove(req.params.blogId, function (blog) {
         res.send(blog);
     })

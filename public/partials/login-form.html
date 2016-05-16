@@ -1,0 +1,10 @@
+<p ng-show="vm.hasError">
+    Es ist ein Fehler aufgetreten: {{vm.errormsg}}
+</p>
+<form novalidate>
+    <input type="text" id="input-text-username" ng-model="vm.user.username" placeholder="Benutzername" autofocus/>
+
+    <input type="text" id="input-text-password" ng-model="vm.user.password" placeholder="Passwort"/>
+
+    <a href ng-click="vm.login(vm.user)">Anmelden</a>
+</form>

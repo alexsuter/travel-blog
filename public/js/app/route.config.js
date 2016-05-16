@@ -9,6 +9,11 @@ function config($routeProvider) {
             controller: 'MainController',
             controllerAs: 'vm'
         })
+        .when('/login', {
+            templateUrl: 'partials/login-form.html',
+            controller: 'AuthenticationController',
+            controllerAs: 'vm'
+        })
         .when('/blog/:blogId', {
             templateUrl: 'partials/blog-detail.html',
             controller: 'BlogDetailController',

@@ -10539,7 +10539,7 @@
     /**
      * @ngdoc provider
      * @name $httpProvider
-     * @description
+     * @token
      * Use `$httpProvider` to change the default behavior of the {@link ng.$http $http} service.
      * */
     function $HttpProvider() {

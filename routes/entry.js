@@ -1,11 +1,12 @@
 var router = require('express').Router();
 var db = require('../components/db');
+var passport = require('passport');
 var ObjectId = require('mongodb').ObjectID;
 
 const ENTRY_COLLECTION = 'entry';
 
 /* PUT entry */
-router.put('/:entryId', function (req, res) {
+router.put('/:entryId', passport.authenticate('jwt', {session: false}), function (req, res) {
     var entry = req.body;
     entry._id = req.params.entryId;
     
@@ -15,7 +16,7 @@ router.put('/:entryId', function (req, res) {
 });
 
 /* DELETE entry */
-router.delete('/:entryId', function (req, res) {
+router.delete('/:entryId', passport.authenticate('jwt', {session: false}), function (req, res) {
     remove(req.params.entryId, function (entry) {
         res.send(entry);
     })
