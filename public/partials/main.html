@@ -1,23 +1,44 @@
 <div>
-    <h1>Reise-Blogs</h1>
+    <div class="callout large primary">
+        <div class="row column text-center">
+            <h1>Travel Blog</h1>
+            <h2 class="subheader">Projektarbeit im Modul WEBAPP der Hochschule Luzern</h2>
+        </div>
+    </div>
     <p ng-show="vm.errormsg">
         Es ist ein Fehler aufgetreten: {{vm.errormsg}}
     </p>
-    <button ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Blog erstellen</button>
-    <create-blog ng-show="vm.isCreateFormVisible" on-success="vm.loadBlogs() && vm.hideCreateForm()"
-                 on-cancel="vm.hideCreateForm()"></create-blog>
-    <table>
-        <tr ng-repeat="blog in vm.travelBlogs">
-            <td>{{ blog.title }}</td>
-            <td>{{ blog.destination }}</td>
-            <td>{{ blog.description }}</td>
-            <td><a ng-href="/#/blog/{{ blog._id }}">Anzeigen</a></td>
-            <td><a href="" ng-click="vm.removeBlog(blog._id)">Löschen</a></td>
-        </tr>
-    </table>
 
-    <hr />
+    <div class="row medium-8 large-7 columns">
+        <button class="button" ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Blog erstellen
+        </button>
+        <create-blog ng-show="vm.isCreateFormVisible" on-success="vm.loadBlogs() && vm.hideCreateForm()"
+                     on-cancel="vm.hideCreateForm()"></create-blog>
+    </div>
+    <div class="row medium-8 large-7 columns">
+        <p ng-show="!vm.travelBlogs.length">Keine Blogs vorhanden.</p>
+        <div class="blog-post" ng-repeat="blog in vm.travelBlogs">
+            <div class="clearfix">
 
-    <login />
+                <h3 class="float-left">
+                    <a ng-href="/#/blog/{{ blog._id }}">{{ blog.title }}</a>
+                    <small>{{ blog.destination }}</small>
+                </h3>
+                <button type="button" class="alert button float-right" ng-click="vm.removeBlog(blog._id)">
+                    Blog löschen
+                </button>
+            </div>
+            <img class="thumbnail float-center" src="http://placehold.it/850x350">
+            <p>{{ blog.description }}</p>
+            <div class="callout">
+                <ul class="menu simple">
+                    <li><a href="#">Autor: Mike Mikers</a></li>
+                    <li><a href="#">Einträge: 3</a></li>
+                    <li>
 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

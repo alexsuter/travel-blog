@@ -46,10 +46,11 @@ router.delete('/:blogId', passport.authenticate('jwt', {session: false}), functi
 });
 
 function save(blog, callback) {
-    db.blog().insertOne(blog, function (err) {
+    db.blog().insertOne(blog, function (err, result) {
         if (err) {
             throw err;
         }
+
         callback(result.ops[0])
     })
 }

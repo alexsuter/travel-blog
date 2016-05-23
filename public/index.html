@@ -2,11 +2,26 @@
 <html lang="de" ng-app="app">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Travel Blog</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
+<div class="top-bar">
+    <div class="top-bar-right">
+        <ul class="menu">
+            <li><a href="#">Login</a></li>
+        </ul>
+    </div>
+</div>
+
 <div ng-view></div>
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/vendor/what-input.js"></script>
+<script src="js/vendor/foundation.js"></script>
 
 <script src="js/vendor/angular.js"></script>
 <script src="js/vendor/angular-route.js"></script>

@@ -1,13 +1,30 @@
-<p ng-show="vm.errormsg">
-    Es ist ein Fehler aufgetreten: {{vm.errormsg}}
-</p>
-<form novalidate>
-    <input type="text" id="input-text-title" ng-model="vm.blog.title" placeholder="Titel" autofocus/>
+<div class="callout">
 
-    <input type="text" id="input-text-destination" ng-model="vm.blog.destination" placeholder="Ort"/>
+    <div class="row">
+        <div class="medium-6 columns">
+            <h5>Neuer Blog erstellen</h5>
+        </div>
+    </div>
+    <div class="row">
 
-    <textarea id="input-textarea-description" ng-model="vm.blog.description" placeholder="Beschreibung"></textarea>
-
-    <a href ng-click="vm.create(vm.blog)">Hinzufügen</a>
-    <a href ng-click="vm.cancelCreation()">Abbrechen</a>
-</form>
+        <form novalidate>
+            <p ng-show="vm.errormsg">
+                Es ist ein Fehler aufgetreten: {{vm.errormsg}}
+            </p>
+            <div class="medium-6 small-centered">
+                <input type="text" id="input-text-title" ng-model="vm.blog.title" placeholder="Titel" autofocus/>
+            </div>
+            <div class="medium-6 small-centered">
+                <input type="text" id="input-text-destination" ng-model="vm.blog.destination" placeholder="Ort"/>
+            </div>
+            <div class="medium-6 small-centered">
+                <textarea id="input-textarea-description" ng-model="vm.blog.description"
+                          placeholder="Beschreibung"></textarea>
+            </div>
+            <div class="medium-6 small-centered">
+                <button class="button success" type="button" ng-click="vm.create(vm.blog)">Hinzufügen</button>
+                <button class="button alert" type="button" ng-click="vm.cancelCreation()">Abbrechen</button>
+            </div>
+        </form>
+    </div>
+</div>
