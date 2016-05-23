@@ -5,22 +5,26 @@
         </div>
     </div>
     <div class="row">
-        <form novalidate>
+        <form name="blog" novalidate>
             <div class="callout alert medium-6 float-center" ng-show="vm.errormsg">
                 Es ist ein Fehler aufgetreten: {{vm.errormsg}}
             </div>
             <div class="medium-6 small-centered">
-                <input type="text" id="input-text-title" ng-model="vm.blog.title" placeholder="Titel" autofocus/>
+                <input type="text" id="input-text-title" ng-model="vm.blog.title" placeholder="Titel" autofocus
+                       required/>
             </div>
             <div class="medium-6 small-centered">
-                <input type="text" id="input-text-destination" ng-model="vm.blog.destination" placeholder="Ort"/>
+                <input type="text" id="input-text-destination" ng-model="vm.blog.destination" placeholder="Ort"
+                       required/>
             </div>
             <div class="medium-6 small-centered">
-                <textarea id="input-textarea-description" ng-model="vm.blog.description"
-                          placeholder="Beschreibung"></textarea>
+                <textarea id="input-textarea-description" ng-model="vm.blog.description" placeholder="Beschreibung"
+                          required></textarea>
             </div>
             <div class="medium-6 small-centered">
-                <button class="button success" type="button" ng-click="vm.create(vm.blog)">Hinzufügen</button>
+                <button class="button success" type="submit" ng-disabled="blog.$invalid" ng-click="vm.create(vm.blog)">
+                    Hinzufügen
+                </button>
                 <button class="button alert" type="button" ng-click="vm.cancelCreation()">Abbrechen</button>
             </div>
         </form>

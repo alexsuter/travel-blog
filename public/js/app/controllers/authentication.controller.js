@@ -27,8 +27,9 @@
             }
 
             function error(error) {
+                vm.errormsg = 'Es ist ein Fehler aufgetreten';
                 if (error.data) {
-                    vm.errormsg = error.data.message;
+                    vm.errormsg += ': ' + error.data.message;
                 }
             }
         }

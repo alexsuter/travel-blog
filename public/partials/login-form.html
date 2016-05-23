@@ -1,23 +1,24 @@
-<div class="callout row float-center" style="margin-top: 100px">
+<div class="callout row float-center medium-3" style="margin-top: 100px">
     <div class="row">
-        <div class="medium-6 columns">
+        <div class="medium-11 columns">
             <h5>Login</h5>
         </div>
     </div>
     <div class="row">
-        <form novalidate>
-            <div class="callout alert medium-6 float-center" ng-show="vm.errormsg">
-                Es ist ein Fehler aufgetreten: {{vm.errormsg}}
-            </div>
-            <div class="medium-6 small-centered">
+        <form name="login" novalidate>
+            <div class="callout alert medium-11 float-center" ng-show="vm.errormsg">{{vm.errormsg}}</div>
+            <div class="medium-11 small-centered">
                 <input type="text" id="input-text-username" ng-model="vm.user.username" placeholder="Benutzername"
-                       autofocus/>
+                       autofocus required>
             </div>
-            <div class="medium-6 small-centered">
-                <input type="text" id="input-text-password" ng-model="vm.user.password" placeholder="Passwort"/>
+            <div class="medium-11 small-centered">
+                <input type="password" id="input-text-password" ng-model="vm.user.password" placeholder="Passwort"
+                       required>
             </div>
-            <div class="medium-6 small-centered">
-                <button class="button success" type="submit" ng-click="vm.login(vm.user)">Anmelden</button>
+            <div class="medium-11 small-centered">
+                <button class="button success" type="submit" ng-disabled="login.$invalid" ng-click="vm.login(vm.user)">
+                    Anmelden
+                </button>
             </div>
         </form>
     </div>
