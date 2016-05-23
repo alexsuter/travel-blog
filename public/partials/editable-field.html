@@ -8,5 +8,8 @@
         <span ng-switch-default>{{vm.fieldValue}}</span>
     </span>
 </span>
-<button ng-click="vm.handleModeChange()">{{vm.editMode ? 'Speichern' : 'Bearbeiten'}}</button>
-<button ng-if="vm.editMode" ng-click="vm.reset()">Reset</button>
+<span ng-click="vm.handleModeChange()">
+    <button class="button success" ng-show="vm.editMode">Speichern</button>
+    <span ng-show="!vm.editMode" class="fa fa-pencil"></span>
+</span>
+<button class="button secondary" ng-if="vm.editMode" ng-click="vm.reset()">Reset</button>

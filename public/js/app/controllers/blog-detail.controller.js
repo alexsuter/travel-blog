@@ -10,7 +10,7 @@
     /* @ngInject */
     function BlogDetailController($routeParams, TravelBlogService) {
         var vm = this;
-        vm.hasError = false;
+        vm.errormsg = '';
         vm.blog = {
             // Don't grab _id from server because promise is not correct resolved
             _id: $routeParams.blogId
@@ -36,8 +36,10 @@
             }
         }
 
-        function error() {
-            vm.hasError = true;
+        function error(error) {
+            if (error.data) {
+                vm.errormsg = error.data.message;
+            }
         }
     }
 

@@ -1,9 +1,17 @@
-<h1>Einträge</h1>
-<button ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Eintrag erstellen</button>
+<div class="row medium-8 large-7 columns">
+    <button class="button" ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">
+        Neuer Eintrag erstellen
+    </button>
+    <create-entry ng-show="vm.isCreateFormVisible" blog-id="vm.blogId"
+                  on-success="vm.$onInit() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
+</div>
 
-<create-entry ng-show="vm.isCreateFormVisible" blog-id="vm.blogId"
-              on-success="vm.$onInit() && vm.hideCreateForm()" on-cancel="vm.hideCreateForm()"></create-entry>
-
-<div ng-repeat="entry in vm.entries">
-    <entry-detail entry="entry" on-delete="vm.remove(entry)" on-update="vm.update(entry)"></entry-detail>
+<div class="row medium-8 large-7 columns">
+    <div class="callout secondary" ng-show="!vm.entries.length && !vm.errormsg">Keine Einträge vorhanden.</div>
+    <div class="callout alert" ng-show="vm.errormsg">
+        Es ist ein Fehler aufgetreten: {{vm.errormsg}}
+    </div>
+    <div class="blog-post" ng-repeat="entry in vm.entries">
+        <entry-detail entry="entry" on-delete="vm.remove(entry)" on-update="vm.update(entry)"></entry-detail>
+    </div>
 </div>

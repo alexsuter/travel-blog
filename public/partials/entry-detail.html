@@ -1,10 +1,24 @@
-<h1>
-    <editable-field field-value="vm.entry.timestamp" field-type="date"
-                    on-update="vm.update('timestamp', value)"></editable-field>
-
-    <editable-field field-value="vm.entry.title" field-type="text"
-                    on-update="vm.update('title', value)"></editable-field>
-</h1>
-<p><a href ng-click="vm.onDelete({entry: vm.entry})">Löschen</a></p>
-<editable-field field-value="vm.entry.description" field-type="textarea"
-                on-update="vm.update('description', value)"></editable-field>
+<div class="clearfix">
+    <h3 class="float-left">
+        <editable-field field-value="vm.entry.title" field-type="text"
+                        on-update="vm.update('title', value)"></editable-field>
+    </h3>
+    <button type="button" class="alert button float-right" ng-click="vm.onDelete({entry: vm.entry})">
+        Eintrag löschen
+    </button>
+</div>
+<img class="thumbnail float-center" src="http://placehold.it/850x350">
+<p>
+    <editable-field field-value="vm.entry.description" field-type="textarea"
+                    on-update="vm.update('description', value)"></editable-field>
+</p>
+<div class="callout">
+    <ul class="menu simple">
+        <li><a href="#">Autor: Mike Mikers</a></li>
+        <li>
+            Datum:
+            <editable-field field-value="vm.entry.timestamp" field-type="date"
+                            on-update="vm.update('timestamp', value)"></editable-field>
+        </li>
+    </ul>
+</div>

@@ -40,6 +40,7 @@
         }
 
         function reset() {
+            vm.errormsg = '';
             vm.entry = {};
         }
 

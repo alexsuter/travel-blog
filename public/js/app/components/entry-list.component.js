@@ -18,6 +18,7 @@
     function EntryListController(TravelBlogService, EntryService) {
         var vm = this;
         vm.entries = [];
+        vm.errormsg = '';
         vm.isCreateFormVisible = false;
 
         vm.$onInit = $onInit;
@@ -30,10 +31,17 @@
 
         function $onInit() {
             return TravelBlogService.getEntries(vm.blogId)
-                .then(success);
+                .then(success)
+                .catch(error);
 
             function success(data) {
                 vm.entries = data
+            }
+
+            function error(error) {
+                if (error.data) {
+                    vm.errormsg = error.data.message;
+                }
             }
         }
 
