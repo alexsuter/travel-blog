@@ -10,7 +10,6 @@
     /* @ngInject */
     function AuthenticationController(UserService, $location) {
         var vm = this;
-        vm.hasError = false;
         vm.errormsg = '';
         vm.user = {};
 
@@ -19,22 +18,19 @@
         ////////////////
 
         function login(user) {
-            return UserService.login(user.username, user.password)
+            return UserService.login(user)
                 .then(success)
                 .catch(error);
 
-            function success(data) {
-                vm.hasError = !data.success;
-                if (vm.hasError) {
-                    vm.errormsg = data.msg;
-                } else {
-                    $location.path( "/" );
+            function success() {
+                $location.path("/");
+            }
+
+            function error(error) {
+                if (error.data) {
+                    vm.errormsg = error.data.message;
                 }
             }
-        }
-
-        function error() {
-            vm.hasError = true;
         }
     }
 

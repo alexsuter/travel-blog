@@ -17,8 +17,14 @@
 
         ////////////////
 
-        function login(username, password) {
-            return $http.post(BASE_URL + '/login', {username: username, password: password}).then(success);
+        function login(user) {
+            return $http.post(BASE_URL + '/login', user)
+                .then(success);
+
+            function success(response) {
+                $window.localStorage['jwtToken'] = response.data.token;
+                return response.data;
+            }
         }
 
         function logout() {
@@ -34,11 +40,6 @@
                 return token.length != 0;
             }
             return false;
-        }
-
-        function success(response) {
-            $window.localStorage['jwtToken'] = response.data.token;
-            return response.data;
         }
     }
 

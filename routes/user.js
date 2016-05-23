@@ -29,8 +29,8 @@ router.post('/signup', function (req, res) {
 
 router.get('/setup', function (req, res) {
     var users = [
-        { username: "alex", password: "1234" },
-        { username: "fabian", password: "4321" }
+        {username: "alex", password: "1234"},
+        {username: "fabian", password: "4321"}
     ]
     db.user().remove({});
     for (var i = 0; i < users.length; i++) {
@@ -59,12 +59,12 @@ router.post('/login', function (req, res) {
             if (bcrypt.compareSync(password, result.passwordHash)) {
                 // if user is found and password is right create a token
                 var token = jwt.encode(result, 'keepItSecret');
-                res.json({success: true, token: 'JWT ' + token});
+                res.send({token: 'JWT ' + token});
             } else {
-                res.send({success: false, msg: 'Authentication failed. Wrong password.'});
+                res.status(400).send({message: 'Falsches Passwort'});
             }
         } else {
-            res.send({success: false, msg: 'Authentication failed. User not found.'});
+            res.status(404).send({message: 'Benutzer wurde nicht gefunden'});
         }
     });
 
