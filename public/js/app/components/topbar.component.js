@@ -3,16 +3,16 @@
 
     angular
         .module('app')
-        .component('login', {
-            templateUrl: 'partials/login-logout.html',
-            controller: LoginController,
+        .component('topbar', {
+            templateUrl: 'partials/topbar.html',
+            controller: TopbarController,
             controllerAs: 'vm'
         });
 
-    LoginController.$inject = ['UserService'];
+    TopbarController.$inject = ['UserService'];
 
     /* @ngInject */
-    function LoginController(UserService) {
+    function TopbarController(UserService) {
         var vm = this;
 
         vm.isAuthenticated = isAuthenticated;
