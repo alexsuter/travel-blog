@@ -3,8 +3,6 @@ var db = require('../components/db');
 var passport = require('passport');
 var ObjectId = require('mongodb').ObjectID;
 
-const ENTRY_COLLECTION = 'entry';
-
 /* PUT entry */
 router.put('/:entryId', passport.authenticate('jwt', {session: false}), function (req, res) {
     var entry = req.body;

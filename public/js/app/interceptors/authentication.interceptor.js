@@ -1,12 +1,25 @@
-angular.module('app').factory('authenticationInjector', ['$window', function($window) {
-    var authenticationInjector = {
-        request: function(config) {
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .factory('AuthenticationInterceptor', AuthenticationInterceptor);
+
+    AuthenticationInterceptor.$inject = ['$window'];
+
+    /* @ngInject */
+    function AuthenticationInterceptor($window) {
+        var service = {
+            request: request
+        };
+        return service;
+
+        ////////////////
+
+        function request(config) {
             config.headers['Authorization'] = $window.localStorage['jwtToken'];
             return config;
         }
-    };
-    return authenticationInjector;
-}]);
-angular.module('app').config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('authenticationInjector');
-}]);
+    }
+
+})();
