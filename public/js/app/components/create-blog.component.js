@@ -39,6 +39,7 @@
         }
 
         function reset() {
+            vm.errormsg = '';
             vm.blog = {};
         }
 

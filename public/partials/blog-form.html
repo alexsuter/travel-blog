@@ -6,11 +6,10 @@
         </div>
     </div>
     <div class="row">
-
         <form novalidate>
-            <p ng-show="vm.errormsg">
+            <div class="callout alert medium-6 float-center" ng-show="vm.errormsg">
                 Es ist ein Fehler aufgetreten: {{vm.errormsg}}
-            </p>
+            </div>
             <div class="medium-6 small-centered">
                 <input type="text" id="input-text-title" ng-model="vm.blog.title" placeholder="Titel" autofocus/>
             </div>

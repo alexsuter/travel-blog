@@ -5,9 +5,6 @@
             <h2 class="subheader">Projektarbeit im Modul WEBAPP der Hochschule Luzern</h2>
         </div>
     </div>
-    <p ng-show="vm.errormsg">
-        Es ist ein Fehler aufgetreten: {{vm.errormsg}}
-    </p>
 
     <div class="row medium-8 large-7 columns">
         <button class="button" ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Blog erstellen
@@ -16,10 +13,12 @@
                      on-cancel="vm.hideCreateForm()"></create-blog>
     </div>
     <div class="row medium-8 large-7 columns">
-        <p ng-show="!vm.travelBlogs.length">Keine Blogs vorhanden.</p>
+        <div class="callout secondary" ng-show="!vm.travelBlogs.length && !vm.errormsg">Keine Blogs vorhanden.</div>
+        <div class="callout alert" ng-show="vm.errormsg">
+            Es ist ein Fehler aufgetreten: {{vm.errormsg}}
+        </div>
         <div class="blog-post" ng-repeat="blog in vm.travelBlogs">
             <div class="clearfix">
-
                 <h3 class="float-left">
                     <a ng-href="/#/blog/{{ blog._id }}">{{ blog.title }}</a>
                     <small>{{ blog.destination }}</small>
@@ -34,9 +33,6 @@
                 <ul class="menu simple">
                     <li><a href="#">Autor: Mike Mikers</a></li>
                     <li><a href="#">Einträge: 3</a></li>
-                    <li>
-
-                    </li>
                 </ul>
             </div>
         </div>
