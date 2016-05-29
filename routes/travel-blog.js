@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var passport = require('passport');
 var db = require('../components/db');
+var Promise = require('es6-promise').Promise;
 var ObjectId = require('mongodb').ObjectID;
 
 /* GET home page. */
@@ -70,14 +71,27 @@ function findAll(callback) {
         title: 1,
         description: 1,
         destination: 1
-    })
-        .sort('_id', -1)
-        .toArray(function (err, result) {
-            if (err) {
-                throw err;
+    }).sort('_id', -1).toArray().then(processResult);
+
+    function processResult(blogs) {
+        // Return a array of pending promises
+        var promises = blogs.map(countEntries);
+        return Promise
+        // Wait until all promises are resolved
+            .all(promises)
+            .then(callback);
+
+        function countEntries(blog) {
+            return db.entry().count({
+                'blogId': ObjectId(blog._id)
+            }).then(setEntryCount);
+
+            function setEntryCount(count) {
+                blog.entryCount = count;
+                return blog
             }
-            callback(result)
-        });
+        }
+    }
 }
 
 function find(blogId, callback) {
