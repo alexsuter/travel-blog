@@ -1,5 +1,5 @@
 <div class="row medium-8 large-7 columns">
-    <button class="button" ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">
+    <button class="button" ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()" authenticated>
         Neuer Eintrag erstellen
     </button>
     <create-entry ng-show="vm.isCreateFormVisible" blog-id="vm.blogId"

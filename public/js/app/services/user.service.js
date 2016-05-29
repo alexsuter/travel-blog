@@ -5,10 +5,10 @@
         .module('app')
         .service('UserService', UserService);
 
-    UserService.$inject = ['$http', '$window'];
+    UserService.$inject = ['$http', '$window', '$route'];
 
     /* @ngInject */
-    function UserService($http, $window) {
+    function UserService($http, $window, $route) {
         const BASE_URL = '/api/user';
 
         this.login = login;
@@ -29,6 +29,7 @@
 
         function logout() {
             $window.localStorage.removeItem('jwtToken');
+            $route.reload();
         }
 
         function isAuthenticated() {

@@ -10,6 +10,6 @@
 </span>
 <span ng-click="vm.handleModeChange()">
     <button class="button success" ng-show="vm.editMode">Speichern</button>
-    <span ng-show="!vm.editMode" class="fa fa-pencil"></span>
+    <span ng-show="!vm.editMode" class="fa fa-pencil" authenticated></span>
 </span>
 <button class="button secondary" ng-if="vm.editMode" ng-click="vm.reset()">Reset</button>

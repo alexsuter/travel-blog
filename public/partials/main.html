@@ -7,7 +7,8 @@
     </div>
 
     <div class="row medium-8 large-7 columns">
-        <button class="button" ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()">Neuer Blog erstellen
+        <button class="button" ng-show="!vm.isCreateFormVisible" ng-click="vm.showCreateForm()" authenticated>
+            Neuer Blog erstellen
         </button>
         <create-blog ng-show="vm.isCreateFormVisible" on-success="vm.loadBlogs() && vm.hideCreateForm()"
                      on-cancel="vm.hideCreateForm()"></create-blog>
@@ -23,7 +24,7 @@
                     <a ng-href="/#/blog/{{ blog._id }}">{{ blog.title }}</a>
                     <small>{{ blog.destination }}</small>
                 </h3>
-                <button type="button" class="alert button float-right" ng-click="vm.removeBlog(blog._id)">
+                <button type="button" class="alert button float-right" ng-click="vm.removeBlog(blog._id)" authenticated>
                     Blog löschen
                 </button>
             </div>

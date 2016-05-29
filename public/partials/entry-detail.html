@@ -3,7 +3,7 @@
         <editable-field field-value="vm.entry.title" field-type="text"
                         on-update="vm.update('title', value)"></editable-field>
     </h3>
-    <button type="button" class="alert button float-right" ng-click="vm.onDelete({entry: vm.entry})">
+    <button type="button" class="alert button float-right" ng-click="vm.onDelete({entry: vm.entry})" authenticated>
         Eintrag löschen
     </button>
 </div>
