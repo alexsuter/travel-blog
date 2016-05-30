@@ -2,7 +2,7 @@
     <div class="row column text-center">
         <div ng-show="vm.errormsg" class="callout alert">Es ist ein Fehler aufgetreten: {{vm.errormsg}}</div>
         <h1>{{ vm.blog.title }}</h1>
-        <h2 class="subheader">{{ vm.blog.description}}</h2>
+        <h2 class="subheader">{{ vm.blog.subtitle}}</h2>
     </div>
 </div>
 <entry-list ng-show="!vm.errormsg" blog-id="{{vm.blog._id}}"></entry-list>

@@ -67,11 +67,7 @@ function saveEntry(blogId, entry, callback) {
 }
 
 function findAll(callback) {
-    db.blog().find({}, {
-        title: 1,
-        description: 1,
-        destination: 1
-    }).sort('_id', -1).toArray().then(processResult);
+    db.blog().find().sort('_id', 1).toArray().then(processResult);
 
     function processResult(blogs) {
         // Return a array of pending promises

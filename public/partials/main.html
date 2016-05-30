@@ -28,7 +28,8 @@
                     Blog löschen
                 </button>
             </div>
-            <img class="thumbnail float-center" src="http://placehold.it/850x350">
+            <img class="thumbnail float-center" ng-if="blog.imageUrl" ng-src="{{blog.imageUrl}}">
+            <img class="thumbnail float-center" ng-if="!blog.imageUrl" src="http://placehold.it/850x350">
             <p>{{ blog.description }}</p>
             <div class="callout">
                 <ul class="menu simple">
